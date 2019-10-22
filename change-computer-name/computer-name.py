@@ -55,6 +55,9 @@ class Ds:
         search_computers_api = api.ComputersApi(self.api_client).search_computers
         computer = self._find_exact_match(search_field, hostname, search_computers_api)
 
+        if not computer.computers:
+            sys.exit('Error: Could not find hostname')
+
         computer_id = computer.computers[0].id
 
         print(f'"{hostname}" - Computer ID: {computer_id}')
